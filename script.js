@@ -1,9 +1,3 @@
-// =============================
-// Konfigurasi YouTube Data API
-// =============================
-
-const YT_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
-
 // Utilitas DOM
 const form = document.getElementById("prefForm");
 const moodSelect = document.getElementById("moodSelect");
@@ -62,25 +56,14 @@ function buildQuery(mood, activity, genre) {
 }
 
 // =============================
-// Fetch ke YouTube Data API
+// Fetch ke YouTube via Netlify Function Proxy
 // =============================
 async function fetchVideos(query, maxResults = 6) {
-  const params = new URLSearchParams({
-    key: API_KEY,
-    part: "snippet",
-    q: query,
-    type: "video",
-    maxResults: String(maxResults),
-    videoEmbeddable: "true",
-    safeSearch: "moderate",
-    order: "relevance",
-  });
-
-  const url = `${YT_SEARCH_URL}?${params.toString()}`;
-  const res = await fetch(url);
+  const proxyUrl = `/.netlify/functions/youtube-search?q=${encodeURIComponent(query)}&max=${encodeURIComponent(String(maxResults))}`;
+  const res = await fetch(proxyUrl, { headers: { accept: "application/json" } });
   if (!res.ok) {
     const text = await res.text().catch(() => "");
-    throw new Error(`YouTube API error ${res.status}: ${text}`);
+    throw new Error(`Proxy error ${res.status}: ${text}`);
   }
   const data = await res.json();
   return data.items || [];
@@ -164,10 +147,7 @@ form.addEventListener("submit", async (e) => {
   const activity = activitySelect.value;
   const genre = genreSelect.value;
 
-  if (!API_KEY || API_KEY === "YOUR_API_KEY") {
-    setStatus("Harap isi API key YouTube di script.js untuk melanjutkan.", "error");
-    return;
-  }
+  
 
   if (!mood || !activity) {
     setStatus("Pilih mood dan kegiatan terlebih dahulu.", "error");
