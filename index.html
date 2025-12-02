@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moodify AI — Rekomendasi Lagu</title>
+    <!-- Link CSS eksternal -->
+    <link rel="stylesheet" href="style.css" />
+    <meta name="description" content="Aplikasi web sederhana berbasis AI untuk rekomendasi lagu dari YouTube sesuai mood, kegiatan, dan genre favorit." />
+  </head>
+  <body>
+    <!-- Header aplikasi -->
+    <header class="app-header">
+      <h1>Moodify AI</h1>
+      <p class="subtitle">Rekomendasi lagu cerdas sesuai mood dan kegiatanmu</p>
+    </header>
+
+    <!-- Form input untuk mood, kegiatan, dan genre -->
+    <main class="container">
+      <section class="form-card" aria-labelledby="formTitle">
+        <h2 id="formTitle">Atur Preferensi</h2>
+        <!-- Form utama: tidak ada submit ke server, hanya JavaScript client-side -->
+        <form id="prefForm">
+          <!-- Pilihan mood -->
+          <div class="form-group">
+            <label for="moodSelect">Mood</label>
+            <select id="moodSelect" name="mood" required>
+              <option value="" selected disabled>Pilih mood...</option>
+              <option value="senang">Senang</option>
+              <option value="sedih">Sedih</option>
+              <option value="capek">Capek</option>
+              <option value="semangat">Semangat</option>
+            </select>
+          </div>
+
+          <!-- Pilihan kegiatan -->
+          <div class="form-group">
+            <label for="activitySelect">Kegiatan</label>
+            <select id="activitySelect" name="activity" required>
+              <option value="" selected disabled>Pilih kegiatan...</option>
+              <option value="belajar">Belajar</option>
+              <option value="olahraga">Olahraga</option>
+              <option value="bersantai">Bersantai</option>
+              <option value="bekerja">Bekerja</option>
+            </select>
+          </div>
+
+          <!-- Pilihan genre (opsional) -->
+          <div class="form-group">
+            <label for="genreSelect">Genre (opsional)</label>
+            <select id="genreSelect" name="genre">
+              <option value="">Tidak spesifik</option>
+              <option value="pop">Pop</option>
+              <option value="rock">Rock</option>
+              <option value="jazz">Jazz</option>
+              <option value="lofi">Lo-fi</option>
+              <option value="edm">EDM</option>
+              <option value="acoustic">Acoustic</option>
+              <option value="kpop">K-Pop</option>
+              <option value="dangdut">Dangdut</option>
+            </select>
+          </div>
+
+          <!-- Tombol aksi utama -->
+          <div class="form-actions">
+            <button id="submitBtn" type="submit" class="btn-primary">Dapatkan Rekomendasi</button>
+          </div>
+
+          <!-- Area info status -->
+          <p id="statusText" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- Hasil video -->
+      <section class="results" aria-labelledby="resultsTitle">
+        <h2 id="resultsTitle">Rekomendasi untukmu</h2>
+        <div id="videoGrid" class="video-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+
+    <!-- Script utama aplikasi -->
+    <script defer src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+/*
+  style.css — Moodify AI
+  Desain UI yang bersih, modern, dan responsif.
+  Catatan: Semua styling menggunakan CSS murni tanpa framework.
+*/
+
+:root {
+  --bg: #0c1424; /* deep indigo base */
+  --bg-2: #0b1f2a; /* teal-navy */
+  --card: #111a2a; /* tinted dark surface (no white) */
+  --muted: #a8b3c3; /* soft slate */
+  --text: #e8edf3; /* soft light */
+  --primary: #65c7c7; /* muted teal */
+  --primary-700: #7b8ef5; /* soft indigo */
+  --ring: rgba(123, 142, 245, 0.25);
+  --danger: #ef6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(900px 340px at 20% -10%, rgba(123,142,245,0.18), transparent),
+    radial-gradient(1000px 380px at 85% -10%, rgba(101,199,199,0.16), transparent),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 100%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+  line-height: 1.6;
+}
+
+.app-header {
+  text-align: center;
+  padding: 32px 16px 8px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.1rem;
+  letter-spacing: 0.1px;
+  color: var(--text);
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.form-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)), var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  position: relative;
+}
+
+.form-card h2 {
+  margin: 0 0 16px;
+  font-size: 1.3rem;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+label {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+select {
+  appearance: none;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: #0f1b2e;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.02s, background-color 0.2s;
+}
+
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+select:hover {
+  background-color: #0f2134;
+}
+
+.form-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-700) 100%);
+  color: #0a0f18;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.05s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.02) saturate(0.98);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.status {
+  min-height: 22px;
+  margin: 4px 2px 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.results {
+  margin-top: 22px;
+}
+
+.results h2 {
+  font-size: 1.2rem;
+  margin: 0 0 12px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+/* Kartu video responsif */
+.video-card {
+  grid-column: span 12;
+  background: #0f1a2a;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.14s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+
+.video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.4);
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  background: linear-gradient(135deg, rgba(123,142,245,0.15), rgba(101,199,199,0.15));
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-meta {
+  padding: 12px 12px 14px;
+}
+
+.video-title {
+  margin: 0 0 6px;
+  font-size: 1.02rem;
+}
+
+.video-channel {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* Breakpoints */
+@media (min-width: 520px) {
+  .video-card { grid-column: span 6; }
+}
+
+@media (min-width: 880px) {
+  .video-card { grid-column: span 4; }
+}
